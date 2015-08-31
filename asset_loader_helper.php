@@ -25,6 +25,3 @@ function load_js($js)
 	$CI->asset->load_js($js);
 
 }
-
-
-

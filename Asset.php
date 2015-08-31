@@ -5,10 +5,11 @@
  * Importance: 
  * js and css Once loaded,  if you try to load them again, then they wont get load as you have already loaded it..:P
  * 
- * Thss file supports cdn as well. If it encounters any file which is getting loaded from CDN servers or any other server, then it will load the path as is, 
+ * This file supports cdn as well. If it encounters any file which is getting loaded from CDN servers or any other server, then it will load the path as is, 
  * else this file load the file from own server with config paths.
  * Enter description here ...
  * @author neeraj
+ * neerjgupta2407@gmail.com
  *
  */
 
@@ -69,7 +70,7 @@ class Asset
 		if(!in_array($files,$this->js) )
 		{
 			//loading the css file in view
-			echo $this->_get_js_script_string($this->_get_js_path($files));
+			echo $this->_get_js_script_string($this->_get_js_base_url($files));
 			$this->js[] = $files;  //adding the css file in stack so that the same js cannot be loaded again
 		}
 		
@@ -100,7 +101,7 @@ class Asset
 		if(!in_array($files,$this->css) && $files != '')
 		{
 			//loading the css file in view
-			echo $this->_get_css_script_string($this->_get_css_path($files));
+			echo $this->_get_css_script_string($this->_get_css_base_url($files));
 			$this->css[] = $files;   //adding the css file in stack so that the same css cannot be loaded again
 		}
 	
@@ -115,7 +116,7 @@ class Asset
 	/**
 	 * This function returns the js file src path to be loaded
 	 */
-	function _get_js_path($js_file)
+	function _get_js_base_url($js_file)
 	{
 		//need to put the check of the Domain
 		//If js file containg any domain name, I.e if we want to load file from cdn, then we should not chenge the file name and return it as is.
@@ -128,8 +129,8 @@ class Asset
 		{
 			//since it is not the cdn path...hence we will return the new file name
 			$name = $this->prep_filename($js_file,'js'); //filtering the name of the file
-			$md5 = md5_file(js_path().$name.'.js');  //genrating the md5 of the file so that no need to change the version and automatically new file will be uploaded..
-			return js_path().$name.'.js?v='.$md5;
+			$md5 = md5_file(js_base_url().$name.'.js');  //genrating the md5 of the file so that no need to change the version and automatically new file will be uploaded..
+			return js_base_url().$name.'.js?v='.$md5;
 		}
 		
 	}
@@ -140,7 +141,7 @@ class Asset
 	* This function returns the js file src path to be loaded
 	*/
 	
-	function _get_css_path($css_file)
+	function _get_css_base_url($css_file)
 	{
 		
 		//need to put the check of the Domain
@@ -155,9 +156,9 @@ class Asset
 		{
 			//since it is not the cdn path...hence we will return the new file name
 			
-			$md5 = md5_file(css_path().$css_file.'.css');  //genrating the md5 of the file so that no need to change the version and automatically new file will be uploaded..
+			$md5 = md5_file(css_base_url().$css_file.'.css');  //genrating the md5 of the file so that no need to change the version and automatically new file will be uploaded..
 			
-			return css_path().$css_file.'.css?v='.$md5;
+			return css_base_url().$css_file.'.css?v='.$md5;
 		}
 		
 	}
@@ -187,7 +188,7 @@ class Asset
 	
 	/**
 	 * This function returns the css script string, which will get loaded on views
-	 * eg: <link rel="stylesheet" type="text/css" media="screen" href="http://www.dineout.co.in/css/style.css?v=1381236134">
+	 * eg: <link rel="stylesheet" type="text/css" media="screen" href="http://www.xyz.com/css/style.css?v=1381236134">
 	 * Enter description here ...
 	 * @param unknown_type $src
 	 * @return string

@@ -1,4 +1,5 @@
 #This is a AssetLoader Library for loading the Css, JS amd Images on your WEB page.
+#Currently this is for CodeIgnitor Only.
 
 
 ##Advantages:
@@ -15,19 +16,8 @@
 	The jss/Css url is made by taking the MD5 of the file and appending it to the Url and hence making it cacheBurstabvle by default.
 
 4)If you want to move your assets to CDN in future, then this can be handled by this by changing the One line for each Asset( Basically you have to change the base url for each js,css and . Image) 
-
-
-
-
-
-
-
-
-
-
-
-
-
+5) CDN stored files can also be loaded
+	load_js('http://cdn.com/jq.js')  will load "http://cdn.com/jq.js"  file only.
 
 
 Setup For CodeIgnitor:

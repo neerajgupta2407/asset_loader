@@ -23,28 +23,30 @@ function image_base_url()
 
 
 /**
- * This function returns the path of js
+ * This function returns the base url of js
  * 
  */
-function js_path()
+function js_base_url()
 {
     /**
      * Change the base url to your Suitable Domain from where Js can be lOaded.
      *	Default is Current Domain
+     **	Can be changed to CDN
     **/
 	return base_url().'assets/js/';
 }
 
 
 /**
- * This function returns the path of css
+ * This function returns the base url of css
  *
  */
-function css_path()
+function css_base_url()
 {
     /**
      * Change the base url to your Suitable Domain from where Css can be lOaded.
      *	Default is Current Domain
+     *	Can be changed to CDN
     **/
 	return base_url().'assets/css/';
 }
